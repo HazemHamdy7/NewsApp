@@ -14,12 +14,13 @@ class NewsApi {
       'https://newsapi.org/v2/top-headlines?country=eg&category=sports&apiKey=f62f954173324348a0f58d2e349a7178');
 
   /// The Article is not Articles //
-  Future<List<Articles>> fetchArticles() async {
+   Future<List<Articles>?> fetchArticles() async {
     try {
       http.Response response = await http.get(Uri.parse('$baseUrl'));
       if (response.statusCode == 200) {
         String data = response.body;
         var jsonData = jsonDecode(data);
+        
         Articles articles = Articles.fromJson(jsonData);
         List<Articles> articlesList =
             articles.articles.map((e) => Articles.fromJson(e)).toList();
@@ -32,21 +33,21 @@ class NewsApi {
     }
   }
 
-  // Future<List<Articles>> fetchArticlesByCategory(String category) async {
-  //   try {
-  //     http.Response response = await http.get(Uri.parse('$baseUrlCategory'));
-  //     if (response.statusCode == 200) {
-  //       String data = response.body;
-  //       var jsonData = jsonDecode(data);
-  //       Articles articles = Articles.fromJson(jsonData);
-  //       List<Articles> articlesList =
-  //           articles.articles.map((e) => Articles.fromJson(e)).toList();
-  //       return articlesList;
-  //     } else {
-  //       print('statusCode = $response.statusCode');
-  //     }
-  //   } catch (ex) {
-  //     print(ex);
-  //   }
-  // }
+  Future<List<Articles>?> fetchArticlesByCategory(String category) async {
+    try {
+      http.Response response = await http.get(Uri.parse('$baseUrlCategory'));
+      if (response.statusCode == 200) {
+        String data = response.body;
+        var jsonData = jsonDecode(data);
+        Articles articles = Articles.fromJson(jsonData);
+        List<Articles> articlesList =
+            articles.articles.map((e) => Articles.fromJson(e)).toList();
+        return articlesList;
+      } else {
+        print('statusCode = $response.statusCode');
+      }
+    } catch (ex) {
+      print(ex);
+    }
+  }
 }

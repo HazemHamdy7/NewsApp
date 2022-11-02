@@ -18,4 +18,6 @@ class Article {
       urlToImage: jsonData['urlToImage'],
     );
   }
+
+  static fromMap(Map<String, dynamic> x) {}
 }

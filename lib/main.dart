@@ -1,3 +1,5 @@
+// ignore_for_file: unused_local_variable
+
 import 'package:api_test/model/articles_model_list.dart';
 import 'package:api_test/server/news_servers.dart';
 import 'package:flutter/material.dart';
@@ -21,13 +23,16 @@ class MyApp extends StatelessWidget {
           onTap: () async {
             NewsApi newsApi = NewsApi();
             var article = await newsApi.fetchArticles();
-            for (var articles in article) {
+            for (var articles in article!) {
               print(article.length);
             }
           },
-          child: Center(
-            child: Container(
-              child: Text('fetchData'),
+          child: InkWell(
+            onTap: () {},
+            child: Center(
+              child: Container(
+                child: Text('fetchData'),
+              ),
             ),
           ),
         ),
